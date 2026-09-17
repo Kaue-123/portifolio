@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --ground: #121214;
+  --surface: #17171a;
+  --surface-2: #202024;
+  --line: #29292e;
+  --line-strong: #3a3a42;
+
+  --text: #e1e1e6;
+  --text-muted: #c4c4cc;
+  --text-dim: #8d8d99;
+
+  --purple: #8257e5;
+  --purple-light: #996dff;
+  --purple-deep: #633bbc;
+  --purple-soft: #b295ff;
+
+  --focus: #996dff;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-purple: var(--purple);
+  --color-purple-light: var(--purple-light);
+  --color-purple-deep: var(--purple-deep);
+  --color-purple-soft: var(--purple-soft);
+
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ground);
+  color: var(--text-muted);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--purple) 45%, transparent);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.mono-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.card:hover {
+  border-color: var(--purple);
+}
+
+.glow-purple {
+  background: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--purple) 32%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.text-purple-gradient {
+  background: linear-gradient(90deg, var(--purple-light) 0%, var(--purple-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.js-ready [role="tabpanel"][data-active="false"] {
+  display: none;
+}
+
+.js-ready [role="tabpanel"][data-active="true"] {
+  animation: panel-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[role="tabpanel"] + [role="tabpanel"] {
+  border-top: 1px solid var(--line);
+  margin-top: 2.5rem;
+}
+
+.js-ready [role="tabpanel"] + [role="tabpanel"] {
+  border-top: 0;
+  margin-top: 0;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js-ready [role="tabpanel"][data-active="true"] {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
