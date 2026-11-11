@@ -1,41 +1,37 @@
-import { Header } from "@/components/Header";
-import { Tabs } from "@/components/Tabs";
-import { AboutPanel } from "@/components/panels/AboutPanel";
-import { ExperiencePanel } from "@/components/panels/ExperiencePanel";
-import { EducationPanel } from "@/components/panels/EducationPanel";
-import { ProjectsPanel } from "@/components/panels/ProjectsPanel";
+import { Nav } from "@/components/Nav";
+import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
+import { Timeline } from "@/components/sections/Timeline";
+import { Skills } from "@/components/sections/Skills";
+import { Contact } from "@/components/sections/Contact";
 import { content } from "@/content/content";
 
 export default function Home() {
   return (
-    <>
+    <div className="mx-auto box-border max-w-[72.5rem] px-6 pb-16">
       <a
-        href="#conteudo"
+        href="#topo"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-purple focus:px-4 focus:py-2 focus:text-sm focus:text-white"
       >
         Pular para o conteúdo
       </a>
 
-      <Header />
+      <Nav />
 
-      <main id="conteudo" className="mx-auto max-w-4xl px-6 py-10 sm:px-8">
-        <Tabs
-          panels={{
-            sobre: <AboutPanel />,
-            experiencia: <ExperiencePanel />,
-            formacao: <EducationPanel />,
-            projetos: <ProjectsPanel />,
-          }}
-        />
+      <main>
+        <Hero />
+        <Projects />
+        <Timeline />
+        <Skills />
+        <Contact />
       </main>
 
-      <footer className="mx-auto max-w-4xl px-6 pb-12 sm:px-8">
-        <div className="border-t border-line pt-6">
-          <p className="mono-label">
-            {content.name} · {content.location}
-          </p>
-        </div>
+      <footer className="mono-label mt-12 flex flex-wrap justify-between gap-3 normal-case">
+        <span>
+          {content.name} · {content.location}
+        </span>
+        <span>{content.footerTech}</span>
       </footer>
-    </>
+    </div>
   );
 }
