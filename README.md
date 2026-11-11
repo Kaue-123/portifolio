@@ -43,11 +43,9 @@ Enquanto `NEXT_PUBLIC_CONTACT_EMAIL` estiver vazio, o site não exibe nenhum end
 
 O prefixo `NEXT_PUBLIC_` é obrigatório: a página é estática, então o valor entra no HTML em tempo de build. Isso é adequado para um e-mail de contato, que é público por natureza — mas nunca coloque segredo em variável com esse prefixo.
 
-Na Vercel, cadastre as duas variáveis em *Settings → Environment Variables*.
-
 ### Antes de publicar
 
-1. **E-mail e domínio** — preencher o `.env` conforme acima.
+1. **E-mail e domínio** — o `.env` vale só para o ambiente local; o site publicado lê as variáveis cadastradas na Vercel (ver [Deploy](#deploy)).
 2. **Nomes de sistemas** — os sistemas do trabalho estão anonimizados. Se houver autorização do empregador, é possível usar os nomes reais.
 
 ## Estrutura
@@ -79,4 +77,6 @@ src/
 
 ## Deploy
 
-Página totalmente estática. Na Vercel, basta importar o repositório — sem variáveis de ambiente.
+Página totalmente estática. Na Vercel, basta importar o repositório: o build não depende de nenhuma variável de ambiente e passa sem `.env`.
+
+O que muda sem as variáveis é só o conteúdo, não o build — vale o mesmo fallback descrito em [Variáveis de ambiente](#variáveis-de-ambiente): o site usa `kaue-carmo.vercel.app` como domínio canônico e omite o e-mail de contato. Para publicar com o e-mail e o domínio reais, cadastre as duas em *Settings → Environment Variables* antes do primeiro build.
