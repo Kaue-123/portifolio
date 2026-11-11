@@ -54,28 +54,34 @@ O prefixo `NEXT_PUBLIC_` é obrigatório: a página é estática, então o valor
 src/
   app/
     layout.tsx             metadata, fontes, JSON-LD
-    page.tsx               cabeçalho + abas
+    page.tsx               navbar, seções e rodapé
     globals.css            design tokens e utilitários
     opengraph-image.tsx    imagem social gerada em build
     sitemap.ts, robots.ts
   components/
-    Header.tsx             nome, resumo, stack e contato
-    Tabs.tsx               navegação por abas (padrão ARIA)
-    Tag.tsx                chips de tecnologia
-    panels/                conteúdo de cada aba
+    Nav.tsx                monograma, âncoras e LinkedIn
+    Tag.tsx                chips de tecnologia e selo de status
+    sections/
+      Hero.tsx             bento de abertura
+      Projects.tsx         projetos e open source
+      Timeline.tsx         trajetória
+      Skills.tsx           competências
+      Contact.tsx          chamada final
   content/content.ts       toda a cópia do site
   lib/env.ts               variáveis de ambiente
 ```
 
 ## Decisões
 
-**Navegação por abas.** Sobre, Experiência, Formação e Projetos em painéis que trocam sem recarregar. Segue o padrão ARIA de tablist: setas esquerda/direita, Home e End navegam entre abas.
+**Página única com âncoras.** Uma rota, seções empilhadas (`#topo`, `#projetos`, `#trajetoria`, `#competencias`, `#contato`) e a navbar apontando para elas. Substituiu a navegação por abas em novembro de 2026, quando o layout passou a seguir o mockup bento. Como não há estado de aba, não há nada a esconder: todo o conteúdo está no HTML e a página inteira funciona sem JavaScript — o mesmo objetivo que as abas resolviam por outro caminho.
 
-**Todos os painéis no HTML.** O conteúdo das quatro abas é renderizado no HTML e os inativos são ocultados por CSS sob a classe `js-ready`. Buscadores indexam tudo e a página continua legível sem JavaScript.
+**Layout em bento.** O cabeçalho é uma grade `auto-fit` com mínimo de 260px por célula (`.bento`): a célula do nome ocupa duas colunas, e as demais — o cartão roxo "Agora", os dois números e a stack — se reacomodam sozinhas conforme a largura. Sem breakpoint escrito à mão.
 
-**Layout em bento.** Cabeçalho e painéis são grades de 12 colunas (`.bento`) com células de larguras alternadas, em vez de cards uniformes empilhados. As larguras vêm de arrays de spans nos componentes (`SKILL_SPANS`, `PROJECT_SPANS`), não do `content.ts` — o conteúdo não carrega decisão de layout. Cada par de células fecha as 12 colunas, e tudo colapsa para uma coluna abaixo de `lg`.
+**Os números dos destaques são derivados.** "2 sistemas em produção" e "2 certificações" vêm de `projects.length` e `certifications.length` em `content.ts`, não de literais. Acrescentar um projeto atualiza o destaque sozinho.
 
-**Paleta roxa.** Roxo `#8257e5` sobre fundo `#121214`, no estilo Rocketseat. Contraste em AA: 4,73:1 no botão roxo com texto branco, 5,33:1 no roxo claro sobre o fundo.
+**Paleta roxa em tema escuro.** Roxo `#8257e5` sobre fundo `#0e0e11`. Contrastes verificados em AA: 7,99:1 no texto corrido, 5,88:1 nas etiquetas monoespaçadas, 4,73:1 no botão roxo com texto branco.
+
+**O texto sobre o roxo sólido foi corrigido.** O mockup pedia `#ede5ff` e `#f3eeff` dentro do cartão "Agora", que dão 3,88:1 e 4,16:1 — abaixo de AA. O token `--on-purple` usa `#fcfaff`, o tom mais próximo que passa (4,56:1), preservando a intenção de um branco levemente tingido.
 
 ## Deploy
 
