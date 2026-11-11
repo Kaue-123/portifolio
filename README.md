@@ -73,6 +73,8 @@ src/
 
 **Todos os painéis no HTML.** O conteúdo das quatro abas é renderizado no HTML e os inativos são ocultados por CSS sob a classe `js-ready`. Buscadores indexam tudo e a página continua legível sem JavaScript.
 
+**Layout em bento.** Cabeçalho e painéis são grades de 12 colunas (`.bento`) com células de larguras alternadas, em vez de cards uniformes empilhados. As larguras vêm de arrays de spans nos componentes (`SKILL_SPANS`, `PROJECT_SPANS`), não do `content.ts` — o conteúdo não carrega decisão de layout. Cada par de células fecha as 12 colunas, e tudo colapsa para uma coluna abaixo de `lg`.
+
 **Paleta roxa.** Roxo `#8257e5` sobre fundo `#121214`, no estilo Rocketseat. Contraste em AA: 4,73:1 no botão roxo com texto branco, 5,33:1 no roxo claro sobre o fundo.
 
 ## Deploy

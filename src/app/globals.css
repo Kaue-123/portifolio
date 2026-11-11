@@ -72,6 +72,12 @@ body {
   color: var(--text-dim);
 }
 
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .card {
   background-color: var(--surface);
   border: 1px solid var(--line);
@@ -80,6 +86,16 @@ body {
 
 .card:hover {
   border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+/* Célula de destaque do bento: tinta roxa que esvai na diagonal. */
+.card-feature {
+  background-image: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--purple) 12%, var(--surface)) 0%,
+    var(--surface) 55%
+  );
 }
 
 .glow-purple {
@@ -133,6 +149,11 @@ body {
 
   .js-ready [role="tabpanel"][data-active="true"] {
     animation: none;
+  }
+
+  /* O deslocamento do hover é instantâneo sem a transição — melhor não ter. */
+  .card:hover {
+    transform: none;
   }
 
   *,
